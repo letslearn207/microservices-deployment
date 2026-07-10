@@ -1,0 +1,21 @@
+# Purpose: Define physical storage on the cluster node
+# For EC2/KDM: Using hostPath (node-local storage)
+# In production: Use AWS EBS CSI driver with StorageClass
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-pv
+  labels:
+    type: local
+    app: redis
+    purpose: vote-storage
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce          # Single node read-write
+  persistentVolumeReclaimPolicy: Retain   # Don't delete data when PVC released
+  hostPath:
+    path: "/data/redis-votevibe"          # Directory on the worker node
+    type: DirectoryOrCreate
