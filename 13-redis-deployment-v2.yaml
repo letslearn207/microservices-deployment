@@ -66,5 +66,5 @@ spec:
           persistentVolumeClaim:
             claimName: redis-pvc            # Bind to our PVC
       # Pin Redis to a specific node (since hostPath PV is node-local)
-      nodeSelector:
-        kubernetes.io/hostname: node01   # Adjust to your actual worker node name
+      #nodeSelector:
+       # kubernetes.io/hostname: node01   # Adjust to your actual worker node name
